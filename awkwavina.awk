@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: 0BSD
 #
-# Copyright (c) 2020 Daniel Smith
+# Copyright (c) 2020-2025 Daniel Smith
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted.
@@ -57,10 +57,10 @@ BEGIN {
 {
 	# Sanitizing input.
 	vin = toupper($f)
-	gsub(/[^A-HJ-NPR-Z0-9]+/, "", vin)
+	gsub(/[^A-Z0-9]+/, "", vin)
 
 	# Validating VIN.
-	if (split(vin, d, "") == 17) {
+	if (!match(vin, ".*[IOQ].*") && split(vin, d, "") == 17) {
 		sum = 0
 		for (i = 1; i <= 17; i++)
 			sum += (CHVAL[d[i]] * WT[i])
